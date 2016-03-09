@@ -44,110 +44,116 @@ public class Magic {
                 ans[0][0] = now[1][0];
             }
             magic[surface] = ans;
-            ans[0][0]="3";
         }
         return this;
     }
 
     public Magic rotationSide(int surface, Boolean cw, int step) {
+        for (int i = 0; i < step; i++) {
+            rotationCircle(surface, cw);
+        }
+
         return this;
     }
 
-    private String[] getCircle(int surface) {
-        String[] circle = new String[12];
+    private void rotationCircle(int surface, boolean cw) {
         switch (surface) {
             case 0: {
-                circle[0] = magic[4][0][0];
-                circle[1] = magic[4][0][1];
-                circle[2] = magic[4][0][2];
-                circle[3] = magic[1][2][0];
-                circle[4] = magic[1][1][0];
-                circle[5] = magic[1][0][0];
-                circle[6] = magic[5][2][2];
-                circle[7] = magic[5][2][1];
-                circle[8] = magic[5][2][0];
-                circle[9] = magic[3][0][0];
-                circle[10] = magic[3][1][0];
-                circle[11] = magic[3][2][0];
+                if (cw) {
+
+                } else {
+                    String tmp = magic[4][0][2];
+                    magic[4][0][2] = magic[4][0][1];
+                    magic[4][0][1] = magic[4][0][0];
+                    magic[4][0][0] = magic[1][2][2];
+                    magic[1][2][2] = magic[1][1][2];
+                    magic[1][1][2] = magic[1][0][2];
+                    magic[1][0][2] = magic[5][2][0];
+                    magic[5][2][0] = magic[5][2][1];
+                    magic[5][2][1] = magic[5][2][2];
+                    magic[5][2][2] = magic[3][0][0];
+                    magic[3][0][0] = magic[3][1][0];
+                    magic[3][1][0] = magic[3][2][0];
+                    magic[3][2][0] = tmp;
+                }
                 break;
             }
-            case 1: {
-                circle[0] = magic[4][0][2];
-                circle[1] = magic[4][1][2];
-                circle[2] = magic[4][2][2];
-                circle[3] = magic[2][2][0];
-                circle[4] = magic[2][1][0];
-                circle[5] = magic[2][0][0];
-                circle[6] = magic[5][0][2];
-                circle[7] = magic[5][1][2];
-                circle[8] = magic[5][2][2];
-                circle[9] = magic[0][0][2];
-                circle[10] = magic[0][1][2];
-                circle[11] = magic[0][2][2];
-                break;
-            }
-            case 2: {
-                circle[0] = magic[4][2][2];
-                circle[1] = magic[4][2][1];
-                circle[2] = magic[4][2][0];
-                circle[3] = magic[3][2][0];
-                circle[4] = magic[3][1][0];
-                circle[5] = magic[3][0][0];
-                circle[6] = magic[5][0][0];
-                circle[7] = magic[5][0][1];
-                circle[8] = magic[5][0][2];
-                circle[9] = magic[1][0][2];
-                circle[10] = magic[1][1][2];
-                circle[11] = magic[1][2][2];
-                break;
-            }
-            case 3: {
-                circle[0] = magic[][][];
-                circle[1] = magic[][][];
-                circle[2] = magic[][][];
-                circle[3] = magic[][][];
-                circle[4] = magic[][][];
-                circle[5] = magic[][][];
-                circle[6] = magic[][][];
-                circle[7] = magic[][][];
-                circle[8] = magic[][][];
-                circle[9] = magic[][][];
-                circle[10] = magic[][][];
-                circle[11] = magic[][][];
-                break;
-            }
-            case 4: {
-                circle[0] = magic[][][];
-                circle[1] = magic[][][];
-                circle[2] = magic[][][];
-                circle[3] = magic[][][];
-                circle[4] = magic[][][];
-                circle[5] = magic[][][];
-                circle[6] = magic[][][];
-                circle[7] = magic[][][];
-                circle[8] = magic[][][];
-                circle[9] = magic[][][];
-                circle[10] = magic[][][];
-                circle[11] = magic[][][];
-                break;
-            }
-            case 5: {
-                circle[0] = magic[][][];
-                circle[1] = magic[][][];
-                circle[2] = magic[][][];
-                circle[3] = magic[][][];
-                circle[4] = magic[][][];
-                circle[5] = magic[][][];
-                circle[6] = magic[][][];
-                circle[7] = magic[][][];
-                circle[8] = magic[][][];
-                circle[9] = magic[][][];
-                circle[10] = magic[][][];
-                circle[11] = magic[][][];
-                break;
-            }
+//            case 1: {
+//                circle[0] = magic[4][0][2];
+//                circle[1] = magic[4][1][2];
+//                circle[2] = magic[4][2][2];
+//                circle[3] = magic[2][2][0];
+//                circle[4] = magic[2][1][0];
+//                circle[5] = magic[2][0][0];
+//                circle[6] = magic[5][0][2];
+//                circle[7] = magic[5][1][2];
+//                circle[8] = magic[5][2][2];
+//                circle[9] = magic[0][0][2];
+//                circle[10] = magic[0][1][2];
+//                circle[11] = magic[0][2][2];
+//                break;
+//            }
+//            case 2: {
+//                circle[0] = magic[4][2][2];
+//                circle[1] = magic[4][2][1];
+//                circle[2] = magic[4][2][0];
+//                circle[3] = magic[3][2][0];
+//                circle[4] = magic[3][1][0];
+//                circle[5] = magic[3][0][0];
+//                circle[6] = magic[5][0][0];
+//                circle[7] = magic[5][0][1];
+//                circle[8] = magic[5][0][2];
+//                circle[9] = magic[1][0][2];
+//                circle[10] = magic[1][1][2];
+//                circle[11] = magic[1][2][2];
+//                break;
+//            }
+//            case 3: {
+//                circle[0] = magic[4][2][0];
+//                circle[1] = magic[4][1][0];
+//                circle[2] = magic[4][0][0];
+//                circle[3] = magic[0][2][0];
+//                circle[4] = magic[0][1][0];
+//                circle[5] = magic[0][0][0];
+//                circle[6] = magic[5][2][0];
+//                circle[7] = magic[5][1][0];
+//                circle[8] = magic[5][0][0];
+//                circle[9] = magic[2][0][2];
+//                circle[10] = magic[2][1][2];
+//                circle[11] = magic[2][2][2];
+//                break;
+//            }
+//            case 4: {
+//                circle[0] = magic[3][2][2];
+//                circle[1] = magic[3][2][1];
+//                circle[2] = magic[3][2][0];
+//                circle[3] = magic[2][2][2];
+//                circle[4] = magic[2][2][1];
+//                circle[5] = magic[2][2][0];
+//                circle[6] = magic[1][2][2];
+//                circle[7] = magic[1][2][1];
+//                circle[8] = magic[1][2][0];
+//                circle[9] = magic[0][2][2];
+//                circle[10] = magic[0][2][1];
+//                circle[11] = magic[0][1][0];
+//                break;
+//            }
+//            case 5: {
+//                circle[0] = magic[0][0][0];
+//                circle[1] = magic[0][0][1];
+//                circle[2] = magic[0][0][2];
+//                circle[3] = magic[1][0][0];
+//                circle[4] = magic[1][0][1];
+//                circle[5] = magic[1][0][2];
+//                circle[6] = magic[2][0][0];
+//                circle[7] = magic[2][0][1];
+//                circle[8] = magic[2][0][2];
+//                circle[9] = magic[3][0][0];
+//                circle[10] = magic[3][0][1];
+//                circle[11] = magic[3][0][2];
+//                break;
+//            }
         }
-        return circle;
     }
 
     public static void fileUp(String[][] can, String str) {
@@ -179,6 +185,37 @@ public class Magic {
         for (i = 2; i >= 0; i--) {
             for (j = 2; j >= 0; j--) {
                 System.out.print(magic[k][i][j] + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    public void outPrintSite() {
+        int k = 4;
+        int i = 0;
+        int j = 0;
+        for (i = 2; i >= 0; i--) {
+            for (j = 2; j >= 0; j--) {
+//                System.out.print(magic[k][i][j] + "\t");
+                System.out.print("[" + i + "][" + j + "]\t");
+            }
+            System.out.println();
+        }
+        for (i = 2; i >= 0; i--) {
+            for (k = 0; k < 4; k++) {
+                for (j = 2; j >= 0; j--) {
+//                    System.out.print(magic[k][i][j] + "\t");
+                    System.out.print("[" + i + "][" + j + "]\t");
+                }
+                System.out.print("\t");
+            }
+            System.out.println();
+        }
+        k = 5;
+        for (i = 2; i >= 0; i--) {
+            for (j = 2; j >= 0; j--) {
+//                System.out.print(magic[k][i][j] + "\t");
+                System.out.print("[" + i + "][" + j + "]\t");
             }
             System.out.println();
         }

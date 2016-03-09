@@ -13,7 +13,9 @@ public class MagicTest {
     @Test
     public void setUp(){
         Magic magic=new Magic();
-        magic.rotationSurface(0,true,1);
+        magic.rotationSide(0, true, 1);
         magic.outPrint();
+        System.out.println();
+        magic.outPrintSite();
     }
 }
