@@ -2,8 +2,6 @@ package afsd.me.magic;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * User: XuHui
  * Date: 2016/3/9
@@ -13,8 +11,10 @@ public class MagicTest {
     @Test
     public void setUp(){
         Magic magic=new Magic();
-        magic.rotationSide(0, true, 1);
-        magic.outPrint();
+//        magic.rotationSide(0, true, 1);
+//        magic.outPrint();
+//        System.out.println();
+        magic.rotationSide(0,Boolean.TRUE,2).outPrint();
         System.out.println();
         magic.outPrintSite();
     }

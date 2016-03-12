@@ -9,6 +9,14 @@ import java.util.Map;
  */
 public class Magic {
     String[][][] magic = new String[6][3][3];
+    P[][] circle = new P[][]{
+            {new P(4, 0, 2), new P(4, 0, 1), new P(4, 0, 0), new P(1, 2, 2), new P(1, 1, 2), new P(1, 0, 2), new P(5, 2, 0), new P(5, 2, 1), new P(5, 2, 2), new P(3, 0, 0), new P(3, 1, 0), new P(3, 2, 0)},
+            {new P(4, 0, 0), new P(4, 1, 0), new P(4, 2, 0), new P(2, 2, 2), new P(2, 1, 2), new P(2, 0, 2), new P(5, 0, 0), new P(5, 1, 0), new P(5, 2, 0), new P(0, 0, 0), new P(0, 1, 0), new P(0, 2, 0)},
+            {new P(4, 2, 0), new P(4, 2, 1), new P(4, 2, 2), new P(3, 2, 2), new P(3, 1, 2), new P(3, 0, 2), new P(5, 0, 2), new P(5, 0, 1), new P(5, 0, 0), new P(1, 0, 0), new P(1, 1, 0), new P(1, 2, 0)},
+            {new P(4, 2, 2), new P(4, 1, 2), new P(4, 0, 2), new P(0, 2, 2), new P(0, 1, 2), new P(0, 0, 2), new P(5, 2, 2), new P(5, 1, 2), new P(5, 0, 2), new P(2, 0, 0), new P(2, 1, 0), new P(2, 2, 0)},
+            {new P(3, 2, 0), new P(3, 2, 1), new P(3, 2, 2), new P(2, 2, 0), new P(2, 2, 1), new P(2, 2, 2), new P(1, 2, 0), new P(1, 2, 1), new P(1, 2, 2), new P(0, 2, 0), new P(0, 2, 1), new P(0, 2, 2)},
+            {new P(0, 0, 2), new P(0, 0, 1), new P(0, 0, 0), new P(1, 0, 2), new P(1, 0, 1), new P(1, 0, 0), new P(2, 0, 2), new P(2, 0, 1), new P(2, 0, 0), new P(3, 0, 2), new P(3, 0, 1), new P(3, 0, 0)}
+    };
 
     public Magic() {
         fileUp(magic[0], "蓝");
@@ -49,110 +57,26 @@ public class Magic {
     }
 
     public Magic rotationSide(int surface, Boolean cw, int step) {
-        for (int i = 0; i < step; i++) {
-            rotationCircle(surface, cw);
-        }
-
+        rotationCircle(surface, cw, step);
         return this;
     }
 
-    private void rotationCircle(int surface, boolean cw) {
-        switch (surface) {
-            case 0: {
-                if (cw) {
+    private void rotationCircle(int surface, boolean cw, int step) {
+        rotationP(surface, cw, step);
+    }
 
-                } else {
-                    String tmp = magic[4][0][2];
-                    magic[4][0][2] = magic[4][0][1];
-                    magic[4][0][1] = magic[4][0][0];
-                    magic[4][0][0] = magic[1][2][2];
-                    magic[1][2][2] = magic[1][1][2];
-                    magic[1][1][2] = magic[1][0][2];
-                    magic[1][0][2] = magic[5][2][0];
-                    magic[5][2][0] = magic[5][2][1];
-                    magic[5][2][1] = magic[5][2][2];
-                    magic[5][2][2] = magic[3][0][0];
-                    magic[3][0][0] = magic[3][1][0];
-                    magic[3][1][0] = magic[3][2][0];
-                    magic[3][2][0] = tmp;
-                }
-                break;
+    public void rotationP(int surface, Boolean cw, int step) {
+        while (step-- > 0) {
+            P p = circle[surface][0];
+            P next;
+            String tmp = magic[p.f][p.x][p.y];
+            for (int i = 1; i < circle[surface].length; i++) {
+                next =!cw? circle[surface][i]:circle[surface][circle[surface].length-i];
+                System.out.println(p.x + ";" + p.y + ";;;;" + next.x + ";" + next.y);
+                magic[p.f][p.x][p.y] = magic[next.f][next.x][next.y];
+                p = next;
             }
-//            case 1: {
-//                circle[0] = magic[4][0][2];
-//                circle[1] = magic[4][1][2];
-//                circle[2] = magic[4][2][2];
-//                circle[3] = magic[2][2][0];
-//                circle[4] = magic[2][1][0];
-//                circle[5] = magic[2][0][0];
-//                circle[6] = magic[5][0][2];
-//                circle[7] = magic[5][1][2];
-//                circle[8] = magic[5][2][2];
-//                circle[9] = magic[0][0][2];
-//                circle[10] = magic[0][1][2];
-//                circle[11] = magic[0][2][2];
-//                break;
-//            }
-//            case 2: {
-//                circle[0] = magic[4][2][2];
-//                circle[1] = magic[4][2][1];
-//                circle[2] = magic[4][2][0];
-//                circle[3] = magic[3][2][0];
-//                circle[4] = magic[3][1][0];
-//                circle[5] = magic[3][0][0];
-//                circle[6] = magic[5][0][0];
-//                circle[7] = magic[5][0][1];
-//                circle[8] = magic[5][0][2];
-//                circle[9] = magic[1][0][2];
-//                circle[10] = magic[1][1][2];
-//                circle[11] = magic[1][2][2];
-//                break;
-//            }
-//            case 3: {
-//                circle[0] = magic[4][2][0];
-//                circle[1] = magic[4][1][0];
-//                circle[2] = magic[4][0][0];
-//                circle[3] = magic[0][2][0];
-//                circle[4] = magic[0][1][0];
-//                circle[5] = magic[0][0][0];
-//                circle[6] = magic[5][2][0];
-//                circle[7] = magic[5][1][0];
-//                circle[8] = magic[5][0][0];
-//                circle[9] = magic[2][0][2];
-//                circle[10] = magic[2][1][2];
-//                circle[11] = magic[2][2][2];
-//                break;
-//            }
-//            case 4: {
-//                circle[0] = magic[3][2][2];
-//                circle[1] = magic[3][2][1];
-//                circle[2] = magic[3][2][0];
-//                circle[3] = magic[2][2][2];
-//                circle[4] = magic[2][2][1];
-//                circle[5] = magic[2][2][0];
-//                circle[6] = magic[1][2][2];
-//                circle[7] = magic[1][2][1];
-//                circle[8] = magic[1][2][0];
-//                circle[9] = magic[0][2][2];
-//                circle[10] = magic[0][2][1];
-//                circle[11] = magic[0][1][0];
-//                break;
-//            }
-//            case 5: {
-//                circle[0] = magic[0][0][0];
-//                circle[1] = magic[0][0][1];
-//                circle[2] = magic[0][0][2];
-//                circle[3] = magic[1][0][0];
-//                circle[4] = magic[1][0][1];
-//                circle[5] = magic[1][0][2];
-//                circle[6] = magic[2][0][0];
-//                circle[7] = magic[2][0][1];
-//                circle[8] = magic[2][0][2];
-//                circle[9] = magic[3][0][0];
-//                circle[10] = magic[3][0][1];
-//                circle[11] = magic[3][0][2];
-//                break;
-//            }
+            magic[p.f][p.x][p.y] = tmp;
         }
     }
 
@@ -164,8 +88,8 @@ public class Magic {
 
     public void outPrint() {
         int k = 4;
-        int i = 0;
-        int j = 0;
+        int i ;
+        int j ;
         for (i = 2; i >= 0; i--) {
             for (j = 2; j >= 0; j--) {
                 System.out.print(magic[k][i][j] + "\t");
@@ -191,12 +115,11 @@ public class Magic {
     }
 
     public void outPrintSite() {
-        int k = 4;
-        int i = 0;
-        int j = 0;
+        int k ;
+        int i ;
+        int j ;
         for (i = 2; i >= 0; i--) {
             for (j = 2; j >= 0; j--) {
-//                System.out.print(magic[k][i][j] + "\t");
                 System.out.print("[" + i + "][" + j + "]\t");
             }
             System.out.println();
@@ -204,20 +127,29 @@ public class Magic {
         for (i = 2; i >= 0; i--) {
             for (k = 0; k < 4; k++) {
                 for (j = 2; j >= 0; j--) {
-//                    System.out.print(magic[k][i][j] + "\t");
                     System.out.print("[" + i + "][" + j + "]\t");
                 }
                 System.out.print("\t");
             }
             System.out.println();
         }
-        k = 5;
+
         for (i = 2; i >= 0; i--) {
             for (j = 2; j >= 0; j--) {
-//                System.out.print(magic[k][i][j] + "\t");
                 System.out.print("[" + i + "][" + j + "]\t");
             }
             System.out.println();
+        }
+    }
+
+    class P {
+        int f;
+        int x;
+        int y;
+        public P(int f, int x, int y) {
+            this.f = f;
+            this.x = x;
+            this.y = y;
         }
     }
 }
