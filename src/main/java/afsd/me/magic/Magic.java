@@ -72,7 +72,6 @@ public class Magic {
             String tmp = magic[p.f][p.x][p.y];
             for (int i = 1; i < circle[surface].length; i++) {
                 next =!cw? circle[surface][i]:circle[surface][circle[surface].length-i];
-                System.out.println(p.x + ";" + p.y + ";;;;" + next.x + ";" + next.y);
                 magic[p.f][p.x][p.y] = magic[next.f][next.x][next.y];
                 p = next;
             }
